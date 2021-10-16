@@ -2,24 +2,39 @@ import random
 
 
 class TicTacToe:
+    """
+        Get your TicTacToe on
+    """
 
     def __init__(self):
         self.board = []
 
     def create_board(self):
+        """
+            Creating the board
+        """
         for i in range(3):
             row = []
             for j in range(3):
                 row.append('-')
             self.board.append(row)
 
-    def get_random_first_player(self):
+    def player_one(self):
+        """
+            First player
+        """
         return random.randint(0, 1)
 
     def fix_spot(self, row, col, player):
+        """
+            Getting the game started
+        """
         self.board[row][col] = player
 
-    def is_player_win(self, player):
+    def setup_win(self, player):
+        """
+            Game on!
+        """
         win = None
 
         n = len(self.board)
@@ -62,32 +77,38 @@ class TicTacToe:
             return win
         return False
 
+    def filled_board(self):
+        """
+            Board
+        """
         for row in self.board:
             for item in row:
                 if item == '-':
                     return False
         return True
 
-    def is_board_filled(self):
-        for row in self.board:
-            for item in row:
-                if item == '-':
-                    return False
-        return True
-
-    def swap_player_turn(self, player):
+    def swap_turn(self, player):
+        """
+            Swap turn
+        """
         return 'X' if player == 'O' else 'O'
 
     def show_board(self):
+        """
+            Actual board setup
+        """
         for row in self.board:
             for item in row:
                 print(item, end=" ")
             print()
 
     def start(self):
+        """
+            Game on
+        """
         self.create_board()
 
-        player = 'X' if self.get_random_first_player() == 1 else 'O'
+        player = 'X' if self.player_one() == 1 else 'O'
         while True:
             print(f"Player {player} turn")
 
@@ -102,17 +123,17 @@ class TicTacToe:
             self.fix_spot(row - 1, col - 1, player)
 
             # checking whether current player is won or not
-            if self.is_player_win(player):
+            if self.setup_win(player):
                 print(f"Player {player} wins the game!")
                 break
 
             # checking whether the game is draw or not
-            if self.is_board_filled():
+            if self.filled_board():
                 print("Match Draw!")
                 break
 
             # swapping the turn
-            player = self.swap_player_turn(player)
+            player = self.swap_turn(player)
 
         # showing the final view of board
         print()
