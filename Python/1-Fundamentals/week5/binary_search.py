@@ -1,4 +1,7 @@
 def binary_search(the_list, target):
+    '''
+        Binary search example
+    '''
     lower_bound = 0
     upper_bound = len(the_list) - 1
 
