@@ -66,15 +66,21 @@ def delete(id: int):
 
 @bp.route('/<int:id>', methods=['PUT'])
 def update(id: int):
-    valiate_user(request.json['username'], password=request.json['password'])
+    u = User.query.get_or_404(id)
+    valiate_user(username=request.json['username'],
+                 password=request.json['password'])
 
-    # construct User
-    u = User(
-        username=request.json['username'],
-        password=request.json['password']
-    )
-    u.password = scramble(u.password)
-
-    db.session.update(u)  # prepare CREATE statement
+    u.username = request.json['username']
+    u.password = scramble(request.json['password'])
     db.session.commit()  # execute CREATE statement
     return jsonify(u.serialize())
+
+
+@bp.route('/<int:id>/liked_tweets', methods=['GET'])
+def liked_tweets(id: int):
+    u = User.query.get_or_404(id)
+    result = []
+    print(u.liked_tweets)
+    for u in u.liked_tweets:
+        result.append(u.serialize())
+    return jsonify(result)
