@@ -11,7 +11,7 @@ db = SQLAlchemy()
 
 class User(db.Model):
     def __init__(self, password: str, username: int) -> None:
-        self.username = username
+        self.u = username
         self.password = password
 
     __tablename__ = 'users'
