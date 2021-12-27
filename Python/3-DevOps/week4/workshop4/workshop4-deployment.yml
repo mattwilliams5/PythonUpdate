@@ -19,17 +19,17 @@ spec:
             - runserver
             - 0.0.0.0:8000
           name: workshop4
-          image: <CHANGE TO YOUR REGISTRY LOGIN SERVER>/workshop4:v1
+          image: mwdjangoregistry.azurecr.io/workshop4:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:
             - name: DATABASE_HOST
-              value: "<CHANGE TO YOUR DATABASE HOST>"
+              value: "django-postgres-mdw.postgres.database.azure.com"
             - name: DATABASE_USER
-              value: "<CHANGE TO YOUR DATABASE USER>"
+              value: "merrydonkey5"
             - name: DATABASE_PASSWORD
-              value: "<CHANGE TO YOUR DATABASE PASSWORD>"
+              value: "aVDjqzQh0Cof8FYoYMcnkA"
             - name: DATABASE_NAME
               value: "nc_tutorials_db"
       affinity:
